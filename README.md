@@ -1,5 +1,7 @@
 # WOD Timer
 
+**App publicada:** https://wod-timer-am.netlify.app
+
 Temporizador de entreno (AMRAP, FOR TIME, EMOM, TABATA) como app web instalable (PWA). Sin anuncios, sin dependencias, funciona sin conexión.
 
 ## Probar en el PC
