@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Que el móvil compruebe siempre si hay versión nueva del service worker
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

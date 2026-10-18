@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0f1115">
+  <title>WOD Timer</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- MENÚ -->
+  <section id="screen-menu" class="screen active">
+    <h1 class="brand">WOD <span>TIMER</span></h1>
+    <div class="menu">
+      <button class="mode-btn" data-mode="amrap"><b>AMRAP</b><small>Máximas rondas en un tiempo</small></button>
+      <button class="mode-btn" data-mode="fortime"><b>FOR TIME</b><small>Lo más rápido posible</small></button>
+      <button class="mode-btn" data-mode="emom"><b>EMOM</b><small>Cada X tiempo, N veces</small></button>
+      <button class="mode-btn" data-mode="tabata"><b>TABATA</b><small>Trabajo / descanso por rondas</small></button>
+    </div>
+  </section>
+
+  <!-- CONFIGURACIÓN -->
+  <section id="screen-config" class="screen">
+    <header class="bar">
+      <button class="icon-btn" data-action="back" aria-label="Volver">&#8592;</button>
+      <h2 id="config-title">AMRAP</h2>
+      <span></span>
+    </header>
+
+    <div class="config-body">
+      <!-- AMRAP -->
+      <div class="cfg" data-for="amrap">
+        <label class="field-label">Minutos</label>
+        <div class="stepper" data-key="amrap.minutes" data-min="1" data-max="60" data-step="1" data-fmt="min"></div>
+      </div>
+
+      <!-- FOR TIME -->
+      <div class="cfg" data-for="fortime">
+        <label class="field-label">Límite de tiempo</label>
+        <div class="segmented" id="fortime-cap-toggle">
+          <button data-cap="on">Con límite</button>
+          <button data-cap="off">Sin límite</button>
+        </div>
+        <div id="fortime-cap-wrap">
+          <div class="stepper" data-key="fortime.cap" data-min="1" data-max="60" data-step="1" data-fmt="min"></div>
+        </div>
+      </div>
+
+      <!-- EMOM -->
+      <div class="cfg" data-for="emom">
+        <label class="field-label" for="emom-every">CADA</label>
+        <select id="emom-every" class="select"></select>
+        <label class="field-label" for="emom-rounds">POR</label>
+        <select id="emom-rounds" class="select"></select>
+        <p class="total" id="emom-total"></p>
+      </div>
+
+      <!-- TABATA -->
+      <div class="cfg" data-for="tabata">
+        <label class="field-label">Rondas</label>
+        <div class="stepper" data-key="tabata.rounds" data-min="1" data-max="50" data-step="1" data-fmt="int"></div>
+        <label class="field-label">Trabajo</label>
+        <div class="stepper" data-key="tabata.work" data-min="1" data-max="600" data-step="1" data-fmt="sec"></div>
+        <label class="field-label">Descanso</label>
+        <div class="stepper" data-key="tabata.rest" data-min="0" data-max="600" data-step="1" data-fmt="sec"></div>
+        <p class="total" id="tabata-total"></p>
+      </div>
+
+      <label class="field-label">Cuenta atrás inicial</label>
+      <div class="segmented" id="countdown-toggle">
+        <button data-cd="10">10 s</button>
+        <button data-cd="5">5 s</button>
+      </div>
+    </div>
+
+    <button class="start-btn" data-action="start">EMPEZAR</button>
+  </section>
+
+  <!-- TEMPORIZADOR -->
+  <section id="screen-timer" class="screen">
+    <header class="bar">
+      <button class="icon-btn" data-action="exit" aria-label="Salir">&#10005;</button>
+      <h2 id="timer-title">AMRAP</h2>
+      <span></span>
+    </header>
+
+    <div class="ring-wrap">
+      <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="ring-track" cx="100" cy="100" r="90"></circle>
+        <circle class="ring-progress" id="ring-progress" cx="100" cy="100" r="90"></circle>
+      </svg>
+      <div class="ring-center">
+        <div class="phase" id="phase-label">PREPÁRATE</div>
+        <div class="time" id="time-label">0:10</div>
+        <div class="round" id="round-label"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl" data-action="reset">Reiniciar</button>
+      <button class="ctrl primary" data-action="pause" id="pause-btn">Pausa</button>
+      <button class="ctrl" data-action="finish" id="finish-btn">Terminar</button>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
